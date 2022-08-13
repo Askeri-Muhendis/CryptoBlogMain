@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CryptoBlogMain</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="crypto_picture">Crypto Currency Picture</string>
+    <string name="crypto_currency_price_change">Crypto Currency Price Change</string>
+    <string name="crypto_price_set">$%s</string>
+</resources>
