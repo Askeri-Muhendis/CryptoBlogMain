@@ -43,11 +43,11 @@ class HomeFragment : Fragment() {
         val cAdapter = CryptoListAdapter{}
         binding.cryptoListRc.adapter = cAdapter
         viewModel.cryptoList.observe(viewLifecycleOwner){items ->
-            items.body()?.data?.let {
-                binding.errorMessage.isVisible = false
-                binding.cryptoListRc.isVisible = true
-                cAdapter.submitList(it)
-            }
+           items?.data?.let {
+               binding.errorMessage.isVisible = false
+               binding.cryptoListRc.isVisible = true
+               cAdapter.submitList(it)
+           }
         }
         viewModel.cryptoError.observe(viewLifecycleOwner){error ->
             error?.let {
