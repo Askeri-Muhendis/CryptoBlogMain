@@ -9,6 +9,7 @@ import com.ibrahimethem.cryptoblogmain.repo.CryptoRepo
 import com.ibrahimethem.cryptoblogmain.util.Consts.API_KEY
 import com.ibrahimethem.cryptoblogmain.util.Consts.LIMIT
 import kotlinx.coroutines.launch
+import okio.IOException
 import retrofit2.Response
 
 class HomeViewModel(private val cryptoRepo : CryptoRepo) : ViewModel() {
@@ -20,8 +21,17 @@ class HomeViewModel(private val cryptoRepo : CryptoRepo) : ViewModel() {
 
     fun getCryptoAll(){
         viewModelScope.launch {
-            val requestApi  = cryptoRepo.getAllCrypto(API_KEY,LIMIT)
-            _cryptoList.postValue(requestApi)
+
+            try {
+                val requestApi  = cryptoRepo.getAllCrypto(API_KEY,LIMIT)
+                if (requestApi.isSuccessful){
+                    _cryptoList.postValue(requestApi)
+                }else{
+                    _cryptoError.postValue(requestApi.code().toString())
+                }
+            }catch (e : Exception){
+
+            }
         }
     }
 }

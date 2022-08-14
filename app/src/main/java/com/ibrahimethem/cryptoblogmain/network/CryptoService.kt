@@ -7,7 +7,7 @@ import retrofit2.http.Header
 import retrofit2.http.Query
 
 interface CryptoService {
-    @GET("v1/cryptocurrency/listings/latest")
+    @GET("v1/cryptocurrency/listings/")
     suspend fun getAllCryptoList(
         @Header("X-CMC_PRO_API_KEY") apiKey : String,
         @Query("limit") limit : String
