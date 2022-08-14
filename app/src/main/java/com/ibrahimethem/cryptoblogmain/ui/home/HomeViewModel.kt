@@ -21,8 +21,9 @@ class HomeViewModel(private val cryptoRepo : CryptoRepo) : ViewModel() {
 
     fun getCryptoAll(){
         viewModelScope.launch {
-
-            try {
+            val requestApi  = cryptoRepo.getAllCrypto(API_KEY,LIMIT)
+            _cryptoList.postValue(requestApi)
+            /*try {
                 val requestApi  = cryptoRepo.getAllCrypto(API_KEY,LIMIT)
                 if (requestApi.isSuccessful){
                     _cryptoList.postValue(requestApi)
@@ -31,7 +32,7 @@ class HomeViewModel(private val cryptoRepo : CryptoRepo) : ViewModel() {
                 }
             }catch (e : Exception){
 
-            }
+            }*/
         }
     }
 }
