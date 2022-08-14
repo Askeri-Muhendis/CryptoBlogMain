@@ -15,9 +15,13 @@ class HomeViewModel(private val cryptoRepo : CryptoRepo) : ViewModel() {
     private val _cryptoList = MutableLiveData<Response<CryptoList>>()
     val cryptoList : LiveData<Response<CryptoList>> = _cryptoList
 
+    private val _cryptoError = MutableLiveData<String?>()
+    val cryptoError : LiveData<String?> = _cryptoError
+
     fun getCryptoAll(){
         viewModelScope.launch {
-            _cryptoList.postValue(cryptoRepo.getAllCrypto(API_KEY,LIMIT))
+            val requestApi  = cryptoRepo.getAllCrypto(API_KEY,LIMIT)
+            _cryptoList.postValue(requestApi)
         }
     }
 }

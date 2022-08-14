@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.ibrahimethem.cryptoblogmain.R
 import com.ibrahimethem.cryptoblogmain.ViewModelFactory
@@ -43,7 +44,16 @@ class HomeFragment : Fragment() {
         binding.cryptoListRc.adapter = cAdapter
         viewModel.cryptoList.observe(viewLifecycleOwner){items ->
             items.body()?.data?.let {
+                binding.errorMessage.isVisible = false
+                binding.cryptoListRc.isVisible = true
                 cAdapter.submitList(it)
+            }
+        }
+        viewModel.cryptoError.observe(viewLifecycleOwner){error ->
+            error?.let {
+                binding.errorMessage.isVisible = true
+                binding.cryptoListRc.isVisible = false
+                binding.errorMessage.text = it
             }
         }
     }
